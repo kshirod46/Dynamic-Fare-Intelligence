@@ -1,5 +1,12 @@
-# 🚕 Dynamic Fare Intelligence - Indian Ride-Hailing
 
+![Header](assets/Header4.png)
+
+
+---
+
+
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://agriscope-india-0.streamlit.app/)
+--- 
 An end-to-end machine-learning project for **dynamic fare estimation** using a public synthetic Indian ride-hailing dataset.
 
 > **Important:** The Kaggle dataset used in this project is synthetic.
@@ -15,9 +22,7 @@ An end-to-end machine-learning project for **dynamic fare estimation** using a p
 
 ## Dataset
 
-**Ride-Hailing Cab Trip Dataset**  
-https://www.kaggle.com/datasets/tharishreddy22/ride-hailing-cab-trip-dataset
-
+ [📂 **Ride-Hailing Cab Trip Dataset**](https://www.kaggle.com/datasets/tharishreddy22/ride-hailing-cab-trip-dataset)
 The project dynamically downloads the public dataset with `kagglehub`.
 
 Expected training columns include:
@@ -155,10 +160,6 @@ Add dashboard screenshots here after running the app:
 reports/
 └── dashboard.png
 ```
-
-## License / Data Note
-
-Check the dataset's current Kaggle license and terms before redistributing the raw data. This repository does **not** include the full downloaded dataset.
 
 ## References
 
