@@ -1,4 +1,4 @@
-# 🚕 Dynamic Fare Intelligence — Indian Ride-Hailing
+# 🚕 Dynamic Fare Intelligence - Indian Ride-Hailing
 
 An end-to-end machine-learning project for **dynamic fare estimation** using a public synthetic Indian ride-hailing dataset.
 
