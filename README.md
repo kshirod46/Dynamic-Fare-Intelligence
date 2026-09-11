@@ -51,8 +51,6 @@ Ridge | Random Forest | Gradient Boosting
 Best pipeline serialized to models/fare_model.joblib
       │
       ├────────────► Streamlit fare prediction
-      │
-      └────────────► Streamlit fare prediction
 ```
 
 ## Repository Structure
