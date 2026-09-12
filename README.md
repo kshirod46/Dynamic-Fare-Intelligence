@@ -5,7 +5,7 @@
 ---
 
 
-[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://agriscope-india-0.streamlit.app/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://dynamic-fare-intelligence.streamlit.app/)
 --- 
 An end-to-end machine-learning project for **dynamic fare estimation** using a public synthetic Indian ride-hailing dataset.
 
