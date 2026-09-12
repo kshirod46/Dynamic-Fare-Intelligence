@@ -1,4 +1,5 @@
 from __future__ import annotations
+from urllib.request import urlretrieve
 
 import json
 from pathlib import Path
@@ -14,6 +15,14 @@ st.set_page_config(
     page_icon="🚕",
     layout="wide",
 )
+
+
+MODEL_URL = (
+    "https://github.com/kshirod46/Dynamic-Fare-Intelligence/"
+    "releases/download/v1.0.0/fare_model.joblib"
+)
+MODEL_PATH = MODEL_DIR / "fare_model.joblib"
+
 
 ROOT = Path(__file__).resolve().parent
 MODEL_DIR = ROOT / "models"
@@ -33,11 +42,16 @@ FEATURES = [
 
 @st.cache_resource
 def load_artifacts():
-    model = load(MODEL_DIR / "fare_model.joblib")
-    feature_meta = json.loads((MODEL_DIR / "feature_metadata.json").read_text())
+    if not MODEL_PATH.exists():
+        with st.spinner("Downloading the ML model..."):
+            urlretrieve(MODEL_URL, MODEL_PATH)
+
+    model = load(MODEL_PATH)
+    feature_meta = json.loads(
+        (MODEL_DIR / "feature_metadata.json").read_text()
+    )
     results = pd.read_csv(MODEL_DIR / "model_comparison.csv")
     return model, feature_meta, results
-
 
 def feature_importance_frame(model) -> pd.DataFrame:
     preprocess = model.named_steps["preprocess"]
