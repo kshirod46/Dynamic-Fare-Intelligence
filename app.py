@@ -1,8 +1,12 @@
 from __future__ import annotations
-from urllib.request import urlretrieve
 
 import json
+import os
 from pathlib import Path
+import shutil
+import tempfile
+import zlib
+from urllib.request import urlopen
 
 import numpy as np
 import pandas as pd
@@ -16,15 +20,13 @@ st.set_page_config(
     layout="wide",
 )
 
-
 ROOT = Path(__file__).resolve().parent
 MODEL_DIR = ROOT / "models"
-
+MODEL_PATH = MODEL_DIR / "fare_model.joblib"
 MODEL_URL = (
     "https://github.com/kshirod46/Dynamic-Fare-Intelligence/"
     "releases/download/v1.0.0/fare_model.joblib"
 )
-MODEL_PATH = MODEL_DIR / "fare_model.joblib"
 
 FEATURES = [
     "Pickup_City",
@@ -39,18 +41,56 @@ FEATURES = [
     "Driver_Rating",
 ]
 
+
+class ModelArtifactError(RuntimeError):
+    """Raised when the downloaded model cannot be loaded."""
+
+
 @st.cache_resource
 def load_artifacts():
-    if not MODEL_PATH.exists():
-        with st.spinner("Downloading the ML model..."):
-            urlretrieve(MODEL_URL, MODEL_PATH)
+    model = None
+    if MODEL_PATH.exists():
+        try:
+            model = load(MODEL_PATH)
+        except (EOFError, OSError, ValueError, zlib.error):
+            MODEL_PATH.unlink()
 
-    model = load(MODEL_PATH)
-    feature_meta = json.loads(
-        (MODEL_DIR / "feature_metadata.json").read_text()
-    )
+    if model is None:
+        if not MODEL_URL:
+            raise FileNotFoundError(
+                "fare_model.joblib is missing. Set MODEL_URL to the public "
+                "GitHub Release asset URL."
+            )
+        MODEL_DIR.mkdir(parents=True, exist_ok=True)
+        temp_path = None
+        try:
+            with st.spinner("Downloading the ML model..."):
+                with tempfile.NamedTemporaryFile(
+                    prefix="fare_model_",
+                    suffix=".part",
+                    dir=MODEL_DIR,
+                    delete=False,
+                ) as temp_file:
+                    temp_path = Path(temp_file.name)
+                    with urlopen(MODEL_URL, timeout=120) as response:
+                        shutil.copyfileobj(response, temp_file)
+
+                try:
+                    model = load(temp_path)
+                except (EOFError, OSError, ValueError, zlib.error) as exc:
+                    raise ModelArtifactError(
+                        "The GitHub Release model is corrupted. Replace the "
+                        "fare_model.joblib release asset with a fresh upload."
+                    ) from exc
+                os.replace(temp_path, MODEL_PATH)
+        finally:
+            if temp_path is not None and temp_path.exists():
+                temp_path.unlink()
+
+    feature_meta = json.loads((MODEL_DIR / "feature_metadata.json").read_text())
     results = pd.read_csv(MODEL_DIR / "model_comparison.csv")
     return model, feature_meta, results
+
 
 def feature_importance_frame(model) -> pd.DataFrame:
     preprocess = model.named_steps["preprocess"]
@@ -74,10 +114,8 @@ def feature_importance_frame(model) -> pd.DataFrame:
 
 try:
     model, feature_meta, results_df = load_artifacts()
-except FileNotFoundError:
-    st.error(
-        "Model artifacts are missing. Run `python src/train_model.py` from the project root first."
-    )
+except (FileNotFoundError, ModelArtifactError) as exc:
+    st.error(str(exc))
     st.stop()
 
 st.title("🚕 Dynamic Fare Intelligence")
