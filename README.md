@@ -151,13 +151,9 @@ We intentionally do **not** use `Discount_Percent` and `Wait_Time_Min` in the ma
 > Built a dynamic fare intelligence system for Indian ride-hailing using a public synthetic trip dataset; compared three regression models, deployed a leakage-resistant scikit-learn preprocessing pipeline, and built an interactive Streamlit fare-estimation dashboard.
 
 ## Screenshots
+![DashBoard](assets/dashboard.png)
 
-Add dashboard screenshots here after running the app:
 
-```text
-reports/
-└── dashboard.png
-```
 
 ## References
 
