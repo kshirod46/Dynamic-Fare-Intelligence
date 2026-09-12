@@ -17,15 +17,14 @@ st.set_page_config(
 )
 
 
+ROOT = Path(__file__).resolve().parent
+MODEL_DIR = ROOT / "models"
+
 MODEL_URL = (
     "https://github.com/kshirod46/Dynamic-Fare-Intelligence/"
     "releases/download/v1.0.0/fare_model.joblib"
 )
 MODEL_PATH = MODEL_DIR / "fare_model.joblib"
-
-
-ROOT = Path(__file__).resolve().parent
-MODEL_DIR = ROOT / "models"
 
 FEATURES = [
     "Pickup_City",
