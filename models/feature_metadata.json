@@ -1,0 +1,80 @@
+{
+  "features": [
+    "Pickup_City",
+    "Vehicle_Type",
+    "Distance_KM",
+    "Duration_Min",
+    "Time_of_Day",
+    "Weather_Condition",
+    "Traffic_Level",
+    "Day_of_Week",
+    "Is_Prime_Member",
+    "Driver_Rating"
+  ],
+  "categorical_features": [
+    "Pickup_City",
+    "Vehicle_Type",
+    "Time_of_Day",
+    "Weather_Condition",
+    "Traffic_Level",
+    "Day_of_Week"
+  ],
+  "numeric_features": [
+    "Distance_KM",
+    "Duration_Min",
+    "Is_Prime_Member",
+    "Driver_Rating"
+  ],
+  "target": "Total_Fare",
+  "best_model": "Random Forest",
+  "random_state": 42,
+  "categories": {
+    "Pickup_City": [
+      "Ahmedabad",
+      "Bengaluru",
+      "Chennai",
+      "Delhi",
+      "Hyderabad",
+      "Kolkata",
+      "Mumbai",
+      "Pune"
+    ],
+    "Vehicle_Type": [
+      "Auto",
+      "Bike",
+      "Mini",
+      "Prime",
+      "SUV",
+      "Sedan"
+    ],
+    "Time_of_Day": [
+      "Afternoon",
+      "Early Morning",
+      "Evening",
+      "Morning",
+      "Night"
+    ],
+    "Weather_Condition": [
+      "Clear",
+      "Cloudy",
+      "Foggy",
+      "Rainy",
+      "Stormy"
+    ],
+    "Traffic_Level": [
+      "High",
+      "Low",
+      "Medium",
+      "Severe"
+    ],
+    "Day_of_Week": [
+      "Friday",
+      "Monday",
+      "Saturday",
+      "Sunday",
+      "Thursday",
+      "Tuesday",
+      "Wednesday"
+    ]
+  }
+}
