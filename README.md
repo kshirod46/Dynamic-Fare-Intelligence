@@ -31,27 +31,8 @@ Expected training columns include:
 
 ## Architecture
 
-```text
-Kaggle dataset
-      │
-      ▼
-Data validation + completed-trip filter
-      │
-      ├──────────────► EDA / reports
-      │
-      ▼
-Preprocessing pipeline
-(one-hot categorical + numeric passthrough)
-      │
-      ▼
-Model comparison
-Ridge | Random Forest | Gradient Boosting
-      │
-      ▼
-Best pipeline serialized to models/fare_model.joblib
-      │
-      ├────────────► Streamlit fare prediction
-```
+![Architecture](assets/Architecture.png)
+
 
 ## Repository Structure
 
