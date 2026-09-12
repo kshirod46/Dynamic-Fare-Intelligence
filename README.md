@@ -127,9 +127,6 @@ Driver_Rating
 
 We intentionally do **not** use `Discount_Percent` and `Wait_Time_Min` in the main fare model because the first is not part of the user-facing prediction form and the second can be unavailable at quote time.
 
-## Resume-Ready Description
-
-> Built a dynamic fare intelligence system for Indian ride-hailing using a public synthetic trip dataset; compared three regression models, deployed a leakage-resistant scikit-learn preprocessing pipeline, and built an interactive Streamlit fare-estimation dashboard.
 
 ## Screenshots
 ![DashBoard](assets/dashboard.png)
