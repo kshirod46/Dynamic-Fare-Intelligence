@@ -25,8 +25,9 @@ MODEL_DIR = ROOT / "models"
 MODEL_PATH = MODEL_DIR / "fare_model.joblib"
 MODEL_URL = (
     "https://github.com/kshirod46/Dynamic-Fare-Intelligence/"
-    "releases/download/v1.0.0/fare_model.joblib"
+    "releases/download/v1.0.1/fare_model.joblib"
 )
+
 
 FEATURES = [
     "Pickup_City",
